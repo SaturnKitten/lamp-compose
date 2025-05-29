@@ -41,7 +41,7 @@ services:
     ports:
       - 8081:80
     depends_on:
-      - postgresql
+      - postgres
     networks:
       - lamp-network
 
