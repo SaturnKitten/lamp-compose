@@ -71,7 +71,7 @@ services:
     ports:
       - "8080:80"
     links:
-      -mysql
+      - mysql
     environment:
       PMA_ARBITRARY: 0 #1 para Habilitar a opção para inserir host no login
       PMA_HOST: mysql
