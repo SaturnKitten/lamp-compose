@@ -67,7 +67,7 @@ services:
     container_name: izadorams-ifsp-phpmyadmin
     restart: always
     volumes:
-      -/sessions
+      - /sessions
     ports:
       - "8080:80"
     links:
