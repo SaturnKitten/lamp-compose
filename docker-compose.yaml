@@ -20,7 +20,7 @@ services:
   
   postgres:
     image: postgres:12
-    container_name: birazn-ifsp-pgsql
+    container_name: izadorams-ifsp-pgsql
     restart: always
     environment:
       POSTGRES_PASSWORD: postdba
@@ -41,5 +41,43 @@ services:
     ports:
       - 8081:80
     depends_on:
-      - postgres
-      aaaa
+      - postgresql
+    networks:
+      - lamp-network
+
+  mysql:
+    image: mysql:5.7 #A versão 8.0 está com instabilidades
+    container_name: izadorams-ifsp-mysql
+    restart: always #Por padrão o Docker não reinicia o container, vamos mudar isso
+    volumes:
+      - ./mysql:/var/lib/mysql
+    ports:
+      - "3306:3306" #Mapeei a porta para funcionar no Dbeaver, mas não precisaria
+    environment:
+      MYSQL_ROOT_PASSWORD: root #Definir senha do usuário root
+      MYSQL_DATABASE: teste #Iniciar o container com um banco criado
+    networks:
+      - lamp-network
+
+  phpmyadmin:
+    build:
+      context: ./phpmyadmin
+      dockerfile: Dockerfile
+
+    container_name: izadorams-ifsp-phpmyadmin
+    restart: always
+    volumes:
+      -/sessions
+    ports:
+      - "8080:80"
+    links:
+      -mysql
+    environment:
+      PMA_ARBITRARY: 0 #1 para Habilitar a opção para inserir host no login
+      PMA_HOST: mysql
+    networks:
+      - lamp-network
+
+  networks:
+    lamp-network:
+      diver: bridge
