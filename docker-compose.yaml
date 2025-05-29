@@ -81,3 +81,9 @@ services:
   networks:
     lamp-network:
       diver: bridge
+
+  volumes:
+    postgres:
+    mysql:
+    web:
+      driver: local
