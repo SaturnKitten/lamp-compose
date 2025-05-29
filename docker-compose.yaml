@@ -80,7 +80,7 @@ services:
 
   networks:
     lamp-network:
-      diver: bridge
+      driver: bridge
 
   volumes:
     postgres:
