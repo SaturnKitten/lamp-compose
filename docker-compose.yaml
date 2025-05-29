@@ -7,7 +7,7 @@ services:
     container_name: izadorams-ifsp-php #Apelido para o container
     restart: always
     volumes:
-      - ./web:/var/www/html/ #Irá copiar o conteúdo da pasta
+      - ./web:/var/www/html/ #Irá copiar o conteúdo da pasta src para o container
     networks:
       - lamp-network
     ports:
